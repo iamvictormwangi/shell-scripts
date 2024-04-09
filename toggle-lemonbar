@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if pidof lemonbar; then
+  pkill lemonbar &
+  pkill lemonbar &
+else
+  launchlemon &
+fi
+

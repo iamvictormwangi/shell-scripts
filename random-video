@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ ! $@ ];then
+  video_dir="/home/mzing/Videos/My Music Videos/"
+  while true; do
+    if ! pidof mpv; then
+      random_video=$(ls "$video_dir" | shuf -n 1)
+      mpv --fs "$video_dir$random_video" &
+      echo $random_video > ~/.video-history
+      sleep 3
+    fi
+  done
+else
+  video_dir=$@
+  while true; do
+    if ! pidof mpv; then
+      random_video=$(ls "$video_dir" | shuf -n 1)
+      mpv --fs "$video_dir$random_video" &
+      echo $random_video > ~/.video-history
+      sleep 3
+    fi
+  done
+fi

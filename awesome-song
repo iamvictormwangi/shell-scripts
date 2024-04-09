@@ -1,0 +1,49 @@
+#!/bin/bash
+# Author: Victor Mwangi
+# Date: Mon Aug 14 08:25:59 EAT 2023
+
+file="/home/mzing/.config/mpd/playlists/favourites.m3u"
+
+add1() {
+  less "$file" | grep "$song1"
+  if [[ $? -eq 0 ]];then
+    notify-send "$song1 \r Already in playlist"
+    ding
+  else
+    tail -1 .video-history | sed 's/.mp4/.mp3/' >> $file
+    notify-send -u low "$song1 \r Saved to playlist"
+    ding
+  fi
+}
+
+add2() {
+  less "$file" | grep "$song2"
+  if [[ $? -eq 0 ]];then
+    notify-send -u low "$song2 \r Already in playlist"
+    ding
+  else
+    mpc current >> $file
+    notify-send -u low "$song2 \r Saved to playlist"
+    ding
+  fi
+}
+
+value=$(ps aux | pgrep -f random-video || ps aux | pgrep -f mpd)
+
+if [[ $? -ne 0 ]];then
+  notify-send -u critical "Mpd nor video daemon is running"
+  ding
+  exit 1
+else
+  ps aux | pgrep -f random-video
+
+  if [[ $? -eq 0 ]];then
+    song1=$(tail -1 .video-history | sed 's/.mp4/.mp3/')
+    add1
+  else
+    song2=$(mpc current)
+    add2
+  fi
+fi
+
+

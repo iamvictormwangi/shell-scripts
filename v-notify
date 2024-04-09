@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if ! ps aux | pgrep -f dunst || ps aux | pgrep -f fnott;then
+  return 1
+fi
+
+( notify-send $@; paplay ~/.config/sounds/ding.mp3 ) &
+

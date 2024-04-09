@@ -1,0 +1,26 @@
+#!/bin/bash
+
+file="/home/mzing/.local/share/helpers/updates"
+
+echo "0" > "$file"
+
+sleep 600
+
+while true;do
+
+  ping google.com -c 1
+
+  if [[ $? -eq 0 ]];then
+    result=$(xbps-install -Mun | wc -l)
+
+    if [ $result -gt 1 ];then
+      notify-send -u critical "You have $result pending updates"
+      ding
+      echo "$result" > "$file"
+    fi
+    sleep 3000000000
+  fi
+
+  sleep 100000
+
+done

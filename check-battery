@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo "battery"
+
+result=$(acpi | awk '{print $5}' | sed 's/%//')
+
+while true; do
+  echo $result
+  if [[ $result -lt 35 ]]; then
+    notify-send -u critical "Low battery"
+    ding
+  fi
+  sleep 1
+done

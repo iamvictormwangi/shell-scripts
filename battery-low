@@ -1,0 +1,19 @@
+#!/bin/bash
+
+acpi | grep "Discharging"
+
+while true; do
+
+  if [[ $? -eq  0 ]]; then
+    echo "Discharging"
+    battery=$(acpi | awk '{print $4}' | sed 's/%,//')
+
+    if [[ $battery -lt 30 ]]; then
+      notify-send -u critical "Your battery is very low : $battery "
+      ding
+      sleep 400
+    fi
+
+    sleep 4
+  fi
+done

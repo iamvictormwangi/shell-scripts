@@ -1,0 +1,14 @@
+#!/bin/sh
+
+while true; do
+  uptime=$(awk '{print int($1)}' /proc/uptime)
+
+  minutes=$((uptime % 3600 / 60))
+
+  if [ $minutes -eq 40 ]; then
+    notify-send -u low "take a quick stretch" &
+    ding
+    sleep 1800
+  fi
+  sleep 60
+done

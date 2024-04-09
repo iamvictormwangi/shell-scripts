@@ -1,0 +1,5 @@
+#!/bin/bash
+
+scrot ~/Pictures/Screenshot --silent
+notify-send -u low "Screenshot taken \n Path: ~/Pictures/Screenshot/%%" &
+ding

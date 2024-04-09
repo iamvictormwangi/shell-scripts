@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Define the directory where your playlists are stored
+playlist_dir="$HOME/.config/mpd/playlists"
+
+# Use find to list all *.m3u files in the playlist directory
+playlists=$(find "$playlist_dir" -type f -name "*.m3u" | sed "s|$playlist_dir/||")
+
+# Use fzf to interactively select a playlist
+selected_playlist=$(echo "$playlists" | fzf --preview "cat '$playlist_dir/{}'" | sed 's/.m3u//')
+
+# If a playlist was selected, add it to MPD
+if [[ -n $selected_playlist ]]; then
+    mpc clear                  # Clear the current MPD playlist
+    echo "The command to load is $selected_playlist"
+    mpc load "$selected_playlist" # Load the selected playlist
+    mpc play                 # Start playing the playlist
+    echo "Added '$selected_playlist' to MPD and started playing."
+else
+    echo "No playlist selected. Nothing added to MPD."
+fi

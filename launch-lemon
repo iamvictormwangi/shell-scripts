@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Author: Victor Mwangi
+# Date: Sat 26 Aug 2023
+
+# kill instances of lemonbar
+
+pkill lemonbar
+sleep 1
+pkill lemonbar
+
+# launch the bars
+~/.config/lemonbar/top.sh &
+~/.config/lemonbar/bottom.sh &

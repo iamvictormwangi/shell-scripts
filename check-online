@@ -1,0 +1,19 @@
+#!/bin/bash
+
+file="/home/mzing/.local/share/helpers/online-status"
+
+sleep 10
+
+while true; do
+
+  ping google.com -c 1
+
+  if [[ $? -eq 2 ]]; then
+    echo "Offline" > "$file"
+  else
+    echo "Online" > "$file"
+  fi
+
+  sleep 10
+
+done

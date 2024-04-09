@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Check if the user provided a word
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <french_word>"
+  exit 1
+fi
+
+# Search for the provided word in the JSON file and extract its English translation
+word="$1"
+result=$(jq --arg word "$word" -r '.[] | select(.french == $word) | .english' ~/french.json)
+
+# Check if a translation was found
+if [ -z "$result" ]; then
+  echo "Translation not found for '$word'"
+else
+  echo "'$word' en Ingles: $result"
+fi

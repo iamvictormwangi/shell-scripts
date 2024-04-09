@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [[ $@ ]]; then
+  input=$@
+else
+  echo -n "Enter input"
+  read input
+fi
+
+
+echo $(( "$input" ))

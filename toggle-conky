@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if pidof conky; then
+  pkill conky &
+  v-notify "Killed conky" &
+  paplay ~/.config/sounds/ding.mp3 &
+else
+  conky &
+  v-notify "Started conky" &
+  paplay ~/.config/sounds/ding.mp3 &
+fi
+
+

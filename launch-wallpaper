@@ -1,0 +1,16 @@
+#!/bin/sh
+
+bg=$(cat ~/.wallpaper)
+
+if ps aux | pgrep -f bspwm || ps aux | pgrep -f qtile; then
+  feh --bg-fill $bg &
+fi
+
+if ps aux | pgrep -f sway; then
+  if ps aux | pgrep -f wbg; then
+    pkill wbg
+    wbg $bg &
+  else
+    wbg $bg &
+  fi
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Author: Victor Mwangi
+# Date: Sat 26 Aug 2023
+
+# kill instances of lemonbar
+
+pkill yabar
+sleep 1
+yabar &
+
+

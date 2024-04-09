@@ -1,0 +1,18 @@
+#!/bin/bash
+
+pwd=$(pwd)
+pdf_file=$(ls *.pdf | shuf -n 1)
+
+# Path to the PDF file
+#pdf_file="the-ultimate-guide-to-anal-sex-for-women.pdf"  # Replace with your PDF file path
+
+# Output folder for extracted images
+output_folder="images"  # Replace with your desired output folder
+
+# Create the output folder if it doesn't exist
+mkdir -p "$output_folder"
+
+# Use pdftoppm to extract images from the PDF (convert each page to PNG)
+pdftoppm -png -f 1 -l 4 "$pdf_file" "$output_folder/image"
+
+echo "Extracted images from $pdf_file"

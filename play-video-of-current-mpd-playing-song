@@ -1,0 +1,12 @@
+#!/bin/bash
+
+song=$(mpc current | sed 's/mp3/mp4/')
+dir="/home/mzing/Videos/My Music Videos/"
+
+mpv "$dir$song"
+
+if [[ $? == 0 ]]; then
+  echo "ran successful"
+else
+  v-notify "Video was not found"
+fi

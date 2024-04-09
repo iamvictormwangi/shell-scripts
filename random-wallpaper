@@ -1,0 +1,13 @@
+#!/bin/bash
+
+while true; do
+  # Set the directory where the wallpapers are stored
+  wallpaper_dir="/home/mzing/Pictures/Wallpapers/"
+
+  # Get a random wallpaper file
+  random_wallpaper=$(ls "$wallpaper_dir" | shuf -n 1)
+
+  feh --bg-fill "$wallpaper_dir$random_wallpaper" &
+  sleep 600
+
+done
