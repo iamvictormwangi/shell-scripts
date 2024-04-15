@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Define the directory to save screenshots
+screenshot_dir="$HOME/Pictures/Screenshot"
+
+# Create the directory if it doesn't exist
+mkdir -p "$screenshot_dir"
+
+# Take the screenshot using scrot
+timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
+screenshot_file="$screenshot_dir/screenshot_$timestamp.png"
+scrot "$screenshot_file"
+
+# Send notification
+notify-send "Screenshot taken. $screenshot_dir "
