@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Get the temperature readings from the thermal zones
+readings=$(cat /sys/class/thermal/thermal_zone*/temp)
+
+# Initialize variables
+total=0
+count=0
+
+# Loop through each reading and calculate the total
+for reading in $readings; do
+    total=$((total + reading))
+    count=$((count + 1))
+done
+
+# Calculate the average temperature
+average=$((total / count))
+
+# Print the average temperature
+echo "$((average / 1000))°C"
